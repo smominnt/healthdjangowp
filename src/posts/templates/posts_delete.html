@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+    <h1>Are you sure you want to delete the post: "{{ obj.title }}" ?</h1>
+    <button class="button buttonDelete">Yes, delete it</button>
+</form>
+<a href=".."><button class="button buttonCancel">No, keep it</button></a>
+
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        width: 175px;
+        cursor: pointer;
+    }
+    .buttonDelete {background-color: #d4716a;}
+    .buttonCancel {background-color: #75d46a;}
+</style>
+
+
+{% endblock %}

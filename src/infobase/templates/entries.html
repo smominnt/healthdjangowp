@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .buttonCreate {background-color: #310066;}
+</style>
+<a href="{% url 'entries:entry-create' %}"><button class="button buttonCreate">Create an entry</button></a>
+<br>
+<br>
+
+
+
+<style>
+table, th, td{
+    border: 1px solid grey;
+    padding: 15px;
+}
+</style>
+
+<table style="width:100%">
+    <tr>
+        <th>Time</th>
+        <th>Title</th>
+        <th>Summary</th>
+        <th>Calories</th>
+        <th>Protein</th>
+        <th>Quality</th>
+        <th>User</th>
+    </tr>
+    {% for x in entry_list %}
+        <tr>
+        {% if not x.quality %}
+            <td><b>{{ x.timestamp }}</b></td>
+            <td><b>{{ x.title }}</b></td>
+            <td>{{ x.summary }}</td>
+            <td>{{ x.c_amount }} </td>
+            <td>{{ x.p_amount}}</td>
+            <td>{{ x.quality }}</td>
+            <td>{{ x.user }}</td>
+        {% else %}
+            <td>{{ x.timestamp }}</td>
+            <td>{{ x.title }}</td>
+            <td>{{ x.summary }}</td>
+            <td>{{ x.c_amount }} </td>
+            <td>{{ x.p_amount}}</td>
+            <td>{{ x.quality }}</td>
+            <td>{{ x.user }}</td>
+            {% endif %}
+    {% endfor %}
+    </tr>
+</table>
+{% endblock %}

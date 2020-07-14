@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Saved Results</h2>
+
+<style>
+table, th, td{
+    border: 1px solid grey;
+    text-align: center;
+    padding: 15px;
+}
+</style>
+<table style="width:100%">
+    <tr>
+        <th>Base Metabolic Requirement</th>
+        <th>Sedentary</th>
+        <th>Light Activity</th>
+        <th>Medium Activity</th>
+        <th>Heavy Activity</th>
+        <th>Athlete</th>
+    </tr>
+    <tr>
+        {% for x in result %}
+        <td>{{ x|floatformat }} cal </td>
+        {% endfor %}
+    </tr>
+</table>
+
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .buttonCreate {background-color: #310066;}
+</style>
+</br>
+<a href="{% url 'bootstrap:calc' %}"><button class="button buttonCreate">Calculate your TDEE</button></a>
+{% endblock %}

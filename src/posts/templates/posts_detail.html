@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if list.0 != None %}
+    <a name="back" href="/posts/{{ list.0.id }}">previous post</a>
+{% else %}
+    <a name="back">previous post</a>
+{% endif %}
+<a name="postpage" href=".">back to posts</a>
+{% if list.2 != None %}
+    <a name="next" href="/posts/{{ list.2.id }}">next post</a>
+{% else %}
+    <a name="next">next post</a>
+{% endif %}
+
+<style>
+    a[name="postpage"] {
+        float: left;
+        width:33.33333%;
+        text-align:center;
+    }
+    a[name="back"] {
+        float:left;
+        width:33.33333%;
+        text-align:left;
+    }
+    a[name="next"] {
+        float:right;
+        width:33.33333%;
+        text-align:right;
+    }
+
+</style>
+</br>
+<h1>{{ obj.title }}</h1>
+<h6> - {{ obj.user }}</h6>
+{% if obj.edited != obj.uploaded %}
+    <p>Uploaded: {{ obj.uploaded }}  Last Edited: {{ obj.edited }} </p>
+{% else %}
+    <p>{{ obj.uploaded }}</p>
+{% endif %}
+{% if obj.user == request.user %}
+    <a href="/posts/edit/{{ list.1.id }}">edit post</a> | <a href="/posts/delete/{{ list.1.id }}">delete post</a>
+{% endif %}
+<div align="justify">
+    {{ obj.content }}
+</div>
+{% endblock %}

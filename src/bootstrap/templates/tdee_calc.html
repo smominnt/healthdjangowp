@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save"/>
+</form>
+<style>
+input[type="number"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    width: 70px;
+    vertical-align:middle;
+    margin-left:20px
+}
+ul {
+   list-style-type: none;
+}
+input[type="radio"] {
+    margin-top:5px;
+    float:left;
+    clear:left;
+    margin-right:10px
+}
+label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: center;
+    padding-top: 5px;
+    text-align: center;
+    width: 100px;
+}
+button {
+    float: center;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<a href="/posts/write"><button class="button buttonCreate">Write a post</button></a>
+{% for obj in list %}
+<h4><a href = '/posts/{{obj.id}}'>{{obj.title}}</a></h4>
+{% if obj.uploaded != obj.edited %}
+    latest activity: {{obj.edited}}</br>
+{% else %}
+    latest activity: {{obj.uploaded}}</br>
+{% endif %}
+{{obj.user}}</br>
+{% endfor %}
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .buttonCreate {background-color: #310066;}
+</style>
+
+{% endblock %}
