@@ -8,3 +8,5 @@ urlpatterns = [
     path('tdee/result', calc_view, name='calc'),
     path('tdee/', result_view, name='result')
 ]
+
+

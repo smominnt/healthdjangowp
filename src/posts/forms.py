@@ -9,6 +9,11 @@ class PostForm(forms.ModelForm): # form used for creating and editing a Post
             "placeholder": "Your title"
         })
     )
+    file = forms.FileField(
+        label='Select image',
+        help_text='max. 42mb',
+        required=False
+    )
     content = forms.CharField(
         required=False,
         widget=forms.Textarea(attrs={
@@ -16,10 +21,11 @@ class PostForm(forms.ModelForm): # form used for creating and editing a Post
             "cols":120,
         })
     )
-    field_order = ['title', 'content']
+    field_order = ['title', 'file', 'content']
     class Meta:
         model = Post
         fields = {
             'title',
+            'file',
             'content'
         }

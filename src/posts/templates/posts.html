@@ -11,6 +11,10 @@
     latest activity: {{obj.uploaded}}</br>
 {% endif %}
 {{obj.user}}</br>
+{% if obj.file %}
+    <img src="{{ obj.file.url }}" alt="" class="center"/>
+{% endif %}
+<hr>
 {% endfor %}
 <style>
     .button {
@@ -25,6 +29,13 @@
         cursor: pointer;
     }
     .buttonCreate {background-color: #310066;}
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+    }
 </style>
 
 {% endblock %}

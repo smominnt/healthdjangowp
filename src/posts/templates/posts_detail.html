@@ -30,7 +30,12 @@
         width:33.33333%;
         text-align:right;
     }
-
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+    }
 </style>
 </br>
 <h1>{{ obj.title }}</h1>
@@ -43,7 +48,11 @@
 {% if obj.user == request.user %}
     <a href="/posts/edit/{{ list.1.id }}">edit post</a> | <a href="/posts/delete/{{ list.1.id }}">delete post</a>
 {% endif %}
+<hr>
+{% if obj.file %}
+    <img src="{{ obj.file.url }}" alt="" class="center"/>
+{% endif %}
 <div align="justify">
-    {{ obj.content }}
+    {{ obj.content|linebreaks }}
 </div>
 {% endblock %}

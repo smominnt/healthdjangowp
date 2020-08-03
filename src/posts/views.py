@@ -39,7 +39,7 @@ def posts_detail_view(request, id=None): # display a specific post and it's cont
 
 @login_required(login_url='accounts:login')
 def posts_create_view(request): # display page to create a post
-    my_form = PostForm(request.POST or None)
+    my_form = PostForm(request.POST or None, request.FILES or None)
     if my_form.is_valid():
         instance = my_form.save(commit=False)
         instance.user = request.user
@@ -52,18 +52,16 @@ def posts_create_view(request): # display page to create a post
 
 @login_required(login_url='accounts:login')
 def posts_edit_view(request, id=id): # display page to edit a post
-    obj = get_object_or_404(Post, id=id)
-    if obj.user != request.user: # if the currently logged in user isn't the author, edit permission is restricted
+    instance = get_object_or_404(Post, id=id)
+    if instance.user != request.user: # if the currently logged in user isn't the author, edit permission is restricted
         return HttpResponseForbidden()
-    my_form = PostForm(request.POST or None, instance=obj)
-
-    if request.POST and my_form.is_valid():
-        my_form.save()
+    my_form = PostForm(request.POST or None, request.FILES or None, instance=instance)
+    if my_form.is_valid():
+        instance = my_form.save(commit=False)
+        instance.save()
         return redirect('/posts/' + str(id))
     context = {
-        'form': my_form,
-        "title": obj.title,
-        "content": obj.content,
+        'form': my_form
     }
     return render(request, "posts_edit.html", context)
 
