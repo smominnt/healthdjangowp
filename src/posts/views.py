@@ -7,6 +7,25 @@ from .forms import PostForm
 from .models import Post
 # Create your views here.
 
+
+def dislike(request, id=id):
+    instance = get_object_or_404(Post, id=id)
+    if (request.user in instance.downvote.all()):
+        instance.downvote.remove(request.user)
+    else:
+        instance.downvote.add(request.user)
+        instance.upvote.remove(request.user)
+    return HttpResponse(status=204)
+
+def like(request, id=id):
+    instance = get_object_or_404(Post, id=id)
+    if (request.user in instance.upvote.all()):
+        instance.upvote.remove(request.user)
+    else:
+        instance.upvote.add(request.user)
+        instance.downvote.remove(request.user)
+    return HttpResponse(status=204)
+
 @login_required(login_url='accounts:login')
 def posts_view(request): # display all posts in database
     queryset = Post.objects.all()

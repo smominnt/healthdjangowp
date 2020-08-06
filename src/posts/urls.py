@@ -4,7 +4,9 @@ from .views import (
     posts_create_view,
     posts_detail_view,
     posts_edit_view,
-    posts_delete_view
+    posts_delete_view,
+    like,
+    dislike
 )
 
 
@@ -15,4 +17,6 @@ urlpatterns = [
     path('posts/write/', posts_create_view, name="postcreate"),
     path('posts/edit/<int:id>', posts_edit_view, name="postedit"),
     path('posts/delete/<int:id>', posts_delete_view, name="postdelete"),
+    path('posts/upvote/<int:id>', like, name="liked"),
+    path('posts/downvote/<int:id>', dislike, name="disliked")
 ]

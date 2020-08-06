@@ -36,10 +36,10 @@ SOFTWARE.-->
 
 </head>
 
-<body>
+<body style="background-color:#262626;">
 
   <!-- Top Navigation -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#563d7c;">
       <a class="navbar-brand" style="color:white">Health and Community</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,7 @@ SOFTWARE.-->
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <div class="dropdown-menu" aria-labelledby="dropdown01" style="background-color:#907dad;">
               <a class="dropdown-item" href="{% url 'post:posthome' %}">User Posts</a>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
@@ -70,7 +70,7 @@ SOFTWARE.-->
 <!--          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
 <!--        </form>-->
         <span class="hello-msg" style="color:white;margin:10px">Hello, {{request.user}}</span>
-        <span ><a class="hello-msg" href="{% url 'accounts:logout' %}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button></a></span>
+        <span ><a class="hello-msg" href="{% url 'accounts:logout' %}"><button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button></a></span>
       </div>
 
     </nav>
@@ -88,7 +88,7 @@ SOFTWARE.-->
 
 
   <!-- Footer -->
-  <footer class="container text-center">
+  <footer class="container text-center" style="color:#9c9c9c">
     <p>&copy; Shafi 2020</p>
   </footer>
 

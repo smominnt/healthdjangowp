@@ -2,6 +2,10 @@ body {
   padding-top: 5rem;
 }
 .starter-template {
+  color: white;
   padding: 3rem 1.5rem;
   text-align: center;
+}
+.dropdown-item{
+    color:white;
 }

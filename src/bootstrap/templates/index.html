@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<body>
 {% if demo_list %}
     {% for demo in demo_list %}
       <h1>{{ demo.demo_title }}</h1>
@@ -12,5 +13,6 @@
       <h1>Django playground</h1>
       <p class="lead">Welcome to this Django playground, used to learn Django through building personal apps</p>
 {% endif %}
+</body>
 
 {% endblock %}

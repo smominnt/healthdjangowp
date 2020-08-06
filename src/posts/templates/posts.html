@@ -2,21 +2,64 @@
 {% load static %}
 
 {% block content %}
+<script>
+    function like(id) {
+        window.location.href = '/posts/upvote/' + id;
+        setTimeout(function() {
+            window.location = '.';
+            window.location.reload();
+        }, 100);
+    }
+    function dislike(id) {
+        window.location.href = '/posts/downvote/' + id;
+        setTimeout(function() {
+            window.location = '.';
+            window.location.reload();
+        }, 100);
+    }
+</script>
+
 <a href="/posts/write"><button class="button buttonCreate">Write a post</button></a>
+<br><br>
 {% for obj in list %}
-<h4><a href = '/posts/{{obj.id}}'>{{obj.title}}</a></h4>
+<div class="scores">
+<span id="likes" style="padding-right:120px;"><a href="javascript:like({{obj.id}}, {{obj.upvote.count}})"><img src="/media/assets/up.png" height="auto"></a>  Likes: {{obj.upvote.count}}</span>
+<span id="dilikes" style="padding-left:120px;">Dislikes: {{obj.downvote.count}}  <a href="javascript:dislike({{obj.id}}, {{obj.downvote.count}})"><img src="/media/assets/down.png" height="auto"></a></span>
+</div>
+<div id="obj">
+    <h6 id ="title"><a href = '/posts/{{obj.id}}' style="color:white;">{{obj.title}}</a></h6>
 {% if obj.uploaded != obj.edited %}
-    latest activity: {{obj.edited}}</br>
+    <div style="color:white;">latest activity: {{obj.edited}}</div>
 {% else %}
-    latest activity: {{obj.uploaded}}</br>
+    <div style="color:white;">latest activity: {{obj.uploaded}}</div>
 {% endif %}
-{{obj.user}}</br>
+    <div style="color:white;">{{obj.user}}</div>
 {% if obj.file %}
     <img src="{{ obj.file.url }}" alt="" class="center"/>
 {% endif %}
-<hr>
+</div>
+<br>
 {% endfor %}
 <style>
+    #title {
+        box-sizing: border-box;
+        border-top: 3px solid #563d7c;
+        border-bottom: 2px solid #563d7c;
+        width: 400px;
+        background: #563d7c;
+        margin-bottom: 2px;
+        word-wrap: break-word;
+    }
+    #obj {
+        box-sizing: content-box;
+        padding-bottom: 10px;
+        padding-top: 0px;
+        width: 400px;
+        border: 2px solid #563d7c;
+        border-radius: 5px;
+        margin: auto;
+        background: black;
+    }
     .button {
         border: none;
         color: white;
@@ -28,13 +71,13 @@
         margin: 4px 2px;
         cursor: pointer;
     }
-    .buttonCreate {background-color: #310066;}
+    .buttonCreate {background-color: #563d7c;}
 
     .center {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 25%;
+        width: 80%;
     }
 </style>
 
