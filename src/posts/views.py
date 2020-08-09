@@ -29,8 +29,17 @@ def like(request, id=id):
 @login_required(login_url='accounts:login')
 def posts_view(request): # display all posts in database
     queryset = Post.objects.all()
+    voted = []
+    for x in queryset:
+        if (request.user in x.upvote.all()):
+            voted.append(1)
+        elif (request.user in x.downvote.all()):
+            voted.append(-1)
+        else:
+            voted.append(0)
+
     context = {
-        "list":queryset
+        "list": zip(queryset, voted),
     }
     return render(request, "posts.html", context)
 
@@ -49,10 +58,17 @@ def posts_detail_view(request, id=None): # display a specific post and it's cont
     list = [prev, obj, nxt] # save access to next and previous posts by creation id
     if not Post:
         return posts_view(request)
+    voted = 0
+    if (request.user in obj.upvote.all()):
+        voted = 1
+    elif (request.user in obj.downvote.all()):
+        voted = -1
+
     context = {
         "obj": obj,
         "pos": pos,
-        "list": list
+        "list": list,
+        "voted": voted
     }
     return render(request, "posts_detail.html", context)
 
@@ -91,6 +107,7 @@ def posts_delete_view(request, id):
         return HttpResponseForbidden()
     if request.method == "POST":
         obj.delete()
+        obj.file.delete()
         return redirect('..')
     context = {
         "obj":obj

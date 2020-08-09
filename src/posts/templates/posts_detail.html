@@ -37,8 +37,46 @@
         width: 75%;
     }
 </style>
-</br>
+<script>
+    function stateVoted(voted, updown, id) {
+        if (updown) {
+            if (voted == 1)
+                document.getElementById(id).src = "/media/assets/up_active.png"
+            else
+                document.getElementById(id).src = "/media/assets/up.png"
+        }
+        else {
+            if (voted == -1)
+                document.getElementById(id).src = "/media/assets/down_active.png"
+            else
+                document.getElementById(id).src = "/media/assets/down.png"
+        }
+    }
+    function like(id) {
+        window.location.href = '/posts/upvote/' + id;
+        setTimeout(function() {
+            window.location = '.';
+            window.location.reload();
+        }, 100);
+    }
+    function dislike(id) {
+        window.location.href = '/posts/downvote/' + id;
+        setTimeout(function() {
+            window.location = '.';
+            window.location.reload();
+        }, 100);
+    }
+</script>
+<br>
 <h1>{{ obj.title }}</h1>
+<div class="scores">
+<span id="likes" style="padding-right:120px;"><a href="javascript:like({{obj.id}}, {{obj.upvote.count}})"><img id={{obj.id}} src="" height="auto"></a>  Likes: {{obj.upvote.count}}</span>
+<span id="dilikes" style="padding-left:120px;">Dislikes: {{obj.downvote.count}}  <a href="javascript:dislike({{obj.id}}, {{obj.downvote.count}})"><img id=-{{obj.id}} src=""  height="auto"></a></span>
+    <script>
+        stateVoted({{voted}}, 1, {{obj.id}});
+        stateVoted({{voted}}, 0, -{{obj.id}});
+    </script>
+</div>
 <h6> - {{ obj.user }}</h6>
 {% if obj.edited != obj.uploaded %}
     <p>Uploaded: {{ obj.uploaded }}  Last Edited: {{ obj.edited }} </p>
