@@ -17,6 +17,8 @@ Small Django project with 4 currently functioning apps:
     * View posts from other users
     * Write own posts
     * Edit and Delete functionality for posts, only available for posts authored by current logged in user
+	* (New) Posts now have a score based on likes and dislikes
+	* (New) Reply to posts with comments
 ## 
 
 I developed this web application for mainly personal use as well as a means to learn about the Django web framework through experimenting. Will occasionally update as I discover more about the framework.

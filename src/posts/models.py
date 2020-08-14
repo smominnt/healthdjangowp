@@ -15,3 +15,15 @@ class Post(models.Model): # Post object for community board, foreign key on User
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model): # comment object that is tied to a post
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    content = models.TextField()
+    uploaded = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['uploaded']
+
+    def __str__(self):
+        return '{} : {}'.format(self.user, self.content)

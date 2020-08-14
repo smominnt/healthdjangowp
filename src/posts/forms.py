@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post
+from .models import Post, Comment
 
 class PostForm(forms.ModelForm): # form used for creating and editing a Post
     title = forms.CharField(
@@ -27,5 +27,12 @@ class PostForm(forms.ModelForm): # form used for creating and editing a Post
         fields = {
             'title',
             'file',
+            'content'
+        }
+
+class CommentForm(forms.ModelForm): # form used for submitting comments
+    class Meta:
+        model = Comment
+        fields = {
             'content'
         }

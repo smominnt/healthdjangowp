@@ -2,9 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
-from .models import Post
+from .models import Post, Comment
 # Create your views here.
 
 
@@ -64,11 +64,26 @@ def posts_detail_view(request, id=None): # display a specific post and it's cont
     elif (request.user in obj.downvote.all()):
         voted = -1
 
+    new_comment = None
+    comments = obj.comments
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.post = obj
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
     context = {
         "obj": obj,
         "pos": pos,
         "list": list,
-        "voted": voted
+        "voted": voted,
+        "comments": comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form
     }
     return render(request, "posts_detail.html", context)
 
